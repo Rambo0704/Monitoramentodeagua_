@@ -26,6 +26,21 @@ create table Hidrometro (
     modelo varchar (100)
 );
 
+INSERT INTO hidrometro (num_serie_hidrometro, marca, modelo)
+VALUES ('HIDRO-001', 'Marca Teste 2', 'Modelo-y');
+
+INSERT INTO hidrometro (num_serie_hidrometro, marca, modelo)
+VALUES ('HIDRO-002', 'Marca Teste 2', 'Modelo-Z');
+
+INSERT INTO hidrometro (num_serie_hidrometro, marca, modelo)
+VALUES ('HIDRO-003', 'Marca Teste 3', 'Modelo-A');
+
+INSERT INTO hidrometro (num_serie_hidrometro, marca, modelo)
+VALUES ('HIDRO-004', 'Marca Teste 4', 'Modelo-B');
+
+INSERT INTO hidrometro (num_serie_hidrometro, marca, modelo)
+VALUES ('HIDRO-005', 'Marca Teste 5', 'Modelo-C');
+
 create table Usuario (
 	cod_usuario varchar(20) primary key,
     nome varchar(255) not null,
@@ -127,7 +142,7 @@ CREATE TABLE Grupos_Usuarios (
 SET @id := gerar_id('U', 10);
 
 INSERT INTO Usuario (cod_usuario, nome, senha, email, tipo_p)
-VALUES (@id, 'Tecnico Master', '123', 'tecnico@agua.com', 'FISICA');
+VALUES (@id, 'Tecnico Master', '$2a$12$PWzNPmbLBBFxLnlc55rm5ODfeKvZikIEeBrXH5FKc083mJLbF7nwu', 'tecnico@agua.com', 'FISICA');
 INSERT INTO Pessoa_Fisica (cod_usuario, cpf, data_nasc)
 VALUES (@id, '00000000000', '1990-01-01');
 
