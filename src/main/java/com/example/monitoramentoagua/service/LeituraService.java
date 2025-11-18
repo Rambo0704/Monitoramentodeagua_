@@ -8,39 +8,21 @@ import com.example.monitoramentoagua.repository.HidrometroRepository;
 import com.example.monitoramentoagua.repository.LeituraRepository;
 import com.example.monitoramentoagua.repository.AlertaRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class LeituraService {
 
-    @Autowired
-    private LeituraRepository leituraRepository;
-
-    @Autowired
-    private HidrometroRepository hidrometroRepository;
-
-    @Autowired
-    private AlertaRepository alertaRepository;
-
-    
-    private final Random random = new Random();
-    private static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    private String gerarIdLeitura() {
-        StringBuilder sb = new StringBuilder("L_");
-        for (int i = 0; i < 10; i++) {
-            sb.append(CHARS.charAt(random.nextInt(CHARS.length())));
-        }
-        return sb.toString();
-    }
-
-
+    private final LeituraRepository leituraRepository;
+    private final HidrometroRepository hidrometroRepository;
+    private final AlertaRepository alertaRepository;
+    private final IdGenerator idGenerator;
 
     @Transactional
     public Leitura criarLeitura(CriarLeituraDTO dto) {
@@ -48,7 +30,7 @@ public class LeituraService {
                 .orElseThrow(() -> new EntityNotFoundException("Hidrômetro não encontrado: " + dto.getNumSerieHidrometro()));
 
         Leitura novaLeitura = new Leitura();
-        novaLeitura.setCodLeitura(gerarIdLeitura());
+        novaLeitura.setCodLeitura(idGenerator.gerarId("L"));
         novaLeitura.setHidrometro(hidrometro);
         novaLeitura.setValorMedido(dto.getValorMedido());
         novaLeitura.setDataHoraLeitura(LocalDateTime.now());
