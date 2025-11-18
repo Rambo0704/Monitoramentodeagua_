@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Leituras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .status-message {
+            min-height: 1.5rem; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col items-center min-h-screen p-4 py-8">
+
+    <div id="login-card" class="bg-white w-full max-w-md p-8 rounded-lg shadow-xl border border-gray-200 mb-6">
+        <h1 class="text-2xl font-bold text-center text-gray-700 mb-6">Login do Técnico</h1>
+        
+        <div class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600 mb-2">Email</label>
+                <input type="email" id="email" name="email"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       placeholder="tecnico@agua.com" value="tecnico@agua.com">
+            </div>
+            
+            <div>
+                <label for="senha" class="block text-sm font-medium text-gray-600 mb-2">Senha</label>
+                <input type="password" id="senha" name="senha"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       placeholder="••••••••" value="123">
+            </div>
+        </div>
+
+        <button id="btnLogin"
+                class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg mt-6
+                       hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                       transition-colors duration-200">
+            Entrar
+        </button>
+
+        <p id="loginStatus" class="status-message mt-4 text-center font-medium text-gray-600"></p>
+    </div>
+
+    <div id="leituras-card" class="bg-white w-full max-w-4xl p-8 rounded-lg shadow-xl border border-gray-200" style="display: none;">
+        
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Gerenciar Leituras</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end border-b border-gray-200 pb-6 mb-6">
+            <div>
+                <label for="numSerie" class="block text-sm font-medium text-gray-600 mb-2">Nº Série Hidrômetro</label>
+                <input type="text" id="numSerie" placeholder="Ex: HIDRO-001"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="valorMedido" class="block text-sm font-medium text-gray-600 mb-2">Valor Medido (m³)</label>
+                <input type="number" step="0.001" id="valorMedido" placeholder="Ex: 123.456"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button id="btnCriar"
+                    class="w-full bg-green-600 text-white font-semibold py-3 px-6 rounded-lg
+                           hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
+                           transition-colors duration-200">
+                Criar Leitura
+            </button>
+        </div>
+
+        <div>
+            <button id="btnListar"
+                    class="w-full md:w-auto bg-gray-700 text-white font-semibold py-2 px-5 rounded-lg
+                           hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2
+                           transition-colors duration-200 mb-4">
+                Listar/Atualizar Leituras
+            </button>
+            
+            <p id="leiturasStatus" class="status-message text-sm text-gray-600 mb-4"></p>
+
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table id="tabelaLeituras" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hidrômetro</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor (m³)</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data/Hora</th>
+                            
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
